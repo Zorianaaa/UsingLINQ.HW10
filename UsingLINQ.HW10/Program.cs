@@ -1,30 +1,31 @@
 ﻿using System;
 using System.Runtime.Intrinsics.Arm;
+using UsingLINQ.HW10;
 
 class Program
 {
     static void Main()
     {
-        Console.WriteLine(string.Join(", ", Enumerable.Range(10, 41)));
+        var data = new List<object>() {
+                "Hello",
+                new Book() { Author = "Terry Pratchett", Name = "Guards! Guards!", Pages = 810 },
+                new List<int>() {4, 6, 8, 2},
+                new string[] {"Hello inside array"},
+                new Film() { Author = "Martin Scorsese", Name= "The Departed", Actors = new List<Actor>() {
+                    new Actor() { Name = "Jack Nickolson", Birthdate = new DateTime(1937, 4, 22)},
+                    new Actor() { Name = "Leonardo DiCaprio", Birthdate = new DateTime(1974, 11, 11)},
+                    new Actor() { Name = "Matt Damon", Birthdate = new DateTime(1970, 8, 10)}
+                }},
+                new Film() { Author = "Gus Van Sant", Name = "Good Will Hunting", Actors = new List<Actor>() {
+                    new Actor() { Name = "Matt Damon", Birthdate = new DateTime(1970, 8, 10)},
+                    new Actor() { Name = "Robin Williams", Birthdate = new DateTime(1951, 8, 11)},
+                }},
+                new Book() { Author = "Stephen King", Name="Finders Keepers", Pages = 200},
+                "Leonardo DiCaprio"
+            };
 
-        Console.WriteLine("\n " + string.Join(", ", Enumerable.Range(10, 41).Where (n => n % 3 == 00)));
-
-        Console.WriteLine("\n " + string.Join(", ", Enumerable.Repeat("Linq", 10)));
-
-        Console.WriteLine("\n " + string.Join(", ", "aaa;abb;ccc;dap".Split(';').Where(s => s.Contains('a'))));
-
-        Console.WriteLine("\n " + string.Join(", ", "aaa;abb;ccc;dap".Split(';').Where(s => s.Contains('a')).Select(s => s.Count(c => c == 'a'))));
-
-        Console.WriteLine("\n " + string.Join(", ", "aaa;xabbx;abb;ccc;dap".Split(';').Any(m => m == "abb")));
-
-        Console.WriteLine("\n " + string.Join(", ", "aaa;xabbx;abb;ccc;dap".Split(';').Where(word => word.Length == "aaa;xabbx;abb;ccc;dap".Split(';').Max(w => w.Length))));
-
-        Console.WriteLine("\n " + "aaa;xabbx;abb;ccc;dap".Split(';').Average(word => word.Length));
-
-        Console.WriteLine("\n " + new string("aaa;xabbx;abb;ccc;dap;zh".Split(';').OrderBy(word => word.Length).First().Reverse().ToArray()));
-
-        Console.WriteLine("\n " + "baaa;aabb;aaa;xabbx;abb;ccc;dap;zh".Split(';').First(word => word.StartsWith("aa")).Skip(2).All(c => c == 'b'));
-
-        Console.WriteLine("\n " + "aaa;xabbx;abb;ccc;dap;zh".Split(';').Where(word => !word.EndsWith("bb")).Skip(2).Last());
+        var example = new UsingLING();
+        example.PrintSomething(data);
     }
 }
+
